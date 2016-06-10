@@ -1,0 +1,5 @@
+[run]
+include = video_village/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin

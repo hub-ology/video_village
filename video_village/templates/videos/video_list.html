@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block ng_controller %}VideoController{% endblock %}
+
+{% block content %}
+    <h1>Video List</h1>
+    {% verbatim %}
+        <div class="panel" ng-repeat="video in videos">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title">{{ video.name }}</h3>
+                <author class="pull-right">{{ video.file }}</author>
+            </div>
+            <p class="well">{{ video.file }}</p>
+        </div>
+    {% endverbatim %}
+{% endblock content %}
