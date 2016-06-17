@@ -7,10 +7,15 @@
     {% verbatim %}
         <div class="panel" ng-repeat="video in videos">
             <div class="panel-heading clearfix">
-                <h3 class="panel-title">{{ video.name }}</h3>
-                <author class="pull-right">{{ video.file }}</author>
+                <h3 class="panel-title">{{ video.title }} - {{ video.name }}</h3>
             </div>
-            <p class="well">{{ video.file }}</p>
+            <p class="well">
+                <video width="320" height="240" controls>
+                <source src="{{ video.file }}" type="video/mp4">Your browser does not support the video tag.
+                </video>
+                <a class="btn btn-primary">Approve</a>
+                <a class="btn btn-danger">Deny</a>
+            </p>
         </div>
     {% endverbatim %}
 {% endblock content %}
