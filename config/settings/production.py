@@ -59,7 +59,8 @@ SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', 'video-villiage-dev.us-east-1.elasticbeanstalk.com'])
 
 ALLOWED_HOSTS = [
-    '.compute-1.amazonaws.com',
+    'localhost',
+    'hubology-video-village-dev.us-east-1.elasticbeanstalk.com',
 ]
 EC2_PRIVATE_IP = None
 try:
