@@ -8,10 +8,13 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework import routers
+
+from schedules.views import ScheduleViewSet
 from videos.views import VideoViewSet
 
 router = routers.DefaultRouter()
 router.register(r'videos', VideoViewSet)
+router.register('schedules', ScheduleViewSet)
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
