@@ -13,5 +13,5 @@ class VideoModelTest(TestCase):
         self.assertTrue(isinstance(self.video, Video))
 
     def test_str(self):
-        self.assertEqual(''.join(('Video: ', self.video.name)), str(self.video))
+        self.assertEqual(''.join(('Video: ', self.video.title, ' ', self.video.uploader_name)), str(self.video))
 
