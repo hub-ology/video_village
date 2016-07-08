@@ -20,3 +20,13 @@ class VideoCreate(CreateView):
     model = Video
     fields = ['uploader_name', 'email', 'title', 'description', 'file']
     success_url = reverse_lazy('videos:success')
+
+
+def overview(request):
+
+    mod_queue = Video.objects.filter(approved=False)
+
+    t = 'videos/overview.html'
+    c = {'moderation_queue_count': len(mod_queue)}
+
+    return render(request, t, c)
