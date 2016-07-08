@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}video_village{% endblock title %}</title>
+    <title>{% block title %}SeeingSpartanburg{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -35,7 +35,10 @@
     <div class="m-b">
       <nav class="navbar navbar-dark navbar-static-top bg-inverse">
         <div class="container">
-          <a class="navbar-brand" href="/">video_village</a>
+          <a class="navbar-brand" href="/">
+              <span><img src="{% static 'images/seeing_logo.jpg'%}" height="50px"></span>
+              SeeingSpartanburg
+          </a>
           <button type="button" class="navbar-toggler hidden-sm-up pull-xs-right" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
             &#9776;
           </button>
@@ -47,7 +50,7 @@
                 <a class="nav-link" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
+                <a class="nav-link" href="http://seeingspartanburg.com/about/">About</a>
               </li>
             </ul>
 
@@ -110,4 +113,4 @@
     {% endblock javascript %}
   </body>
 </html>
- 
+
