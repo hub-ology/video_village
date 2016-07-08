@@ -50,6 +50,8 @@ LOCAL_APPS = (
     'video_village.users',  # custom users app
     # Your stuff: custom apps go here
     'videos',
+    'schedules',
+    'pis',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -104,7 +106,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db('DATABASE_URL', default='postgres://localhost/video_village'),
+    'default': env.db('DATABASE_URL', default='sqlite:///videos.db'),
     # 'default': env.db(''),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True

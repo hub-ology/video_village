@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render
 from django.template import Context
 from django.views.generic import FormView, CreateView
@@ -17,5 +18,15 @@ class VideoViewSet(viewsets.ModelViewSet):
 
 class VideoCreate(CreateView):
     model = Video
-    fields = '__all__'
+    fields = ['uploader_name', 'email', 'title', 'description', 'file']
+    success_url = reverse_lazy('videos:success')
 
+
+def overview(request):
+
+    mod_queue = Video.objects.filter(approved=False)
+
+    t = 'videos/overview.html'
+    c = {'moderation_queue_count': len(mod_queue)}
+
+    return render(request, t, c)
