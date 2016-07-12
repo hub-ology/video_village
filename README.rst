@@ -1,22 +1,63 @@
-video_village
-==============================
-
 Video Village for Spartanburg
+==============================
 
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
 
-How to get started:
-* Clone repository from https://github.com/hub-ology/video_village
-* Create virtual environment - Python 3.5
-* Install requirements pip install -r requirements/local.txt
-* Create database 'videos.db' in project folder - sqlite videos.db
-* manage.py migrate to set database schema
-* manage.py createsuperuser to create the first user for the database which will allow you to login to the admin
-* To run local server manage.py runserver
-* To run tests manage.py test
+Getting Started
+----------------
 
-LICENSE: MIT
+- Fork this repository from https://github.com/hub-ology/video_village
+- Install Python 3.5+ from https://www.python.org/downloads/ (if you don't already have it)
+- In your project directory, set up a new virtual environment for your work:
 
+.. code-block:: bash
+
+	pyvenv venv
+
+- activate the virtual environment
+
+.. code-block:: bash
+
+	source venv/bin/activate
+
+- install the project requirements into the virtual environment:
+
+.. code-block:: bash
+
+    pip install --upgrade pip
+    pip install -r requirements/local.txt
+
+- run the project's migrations to get a local sqlite database established:
+
+.. code-block:: bash
+
+	python manage.py migrate
+
+- Create an administrative user for local use and development:
+
+.. code-block:: bash
+
+	python manage.py createsuperuser
+
+- run a server to begin working with the project locally at http://localhost:8000 :
+
+.. code-block:: bash
+
+	python manage.py runserver
+
+Before submitting a pull request, please ensure tests pass locally.
+Also add new tests when incorporating new functionality or changing existing behavior.
+
+.. code-block:: bash
+
+	python manage.py test
+
+License
+-------
+MIT
+See LICENSE_ for details.
+
+.. _LICENSE: LICENSE
 
