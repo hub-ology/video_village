@@ -27,7 +27,7 @@ Getting Started
 .. code-block:: bash
 
     pip install --upgrade pip
-	pip install -r requirements/local.txt
+    pip install -r requirements/local.txt
 
 - run the project's migrations to get a local sqlite database established:
 
