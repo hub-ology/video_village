@@ -56,6 +56,7 @@ node_modules/
 
 # virtual environments
 .env
+venv
 
 # User-uploaded media
 video_village/media/
@@ -73,3 +74,4 @@ tests/.hitch
 
 !.elasticbeanstalk/*.global.yml
 
+videos.db
