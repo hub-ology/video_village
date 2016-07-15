@@ -17,7 +17,9 @@ ROOT_DIR = environ.Path(__file__) - 3  # (video_village/config/settings/common.p
 APPS_DIR = ROOT_DIR.path('video_village')
 
 env = environ.Env()
-if not os.environ.get('AWS_PATH'):
+if os.environ.get('AWS_PATH'):
+    environ.Env.read_env(ROOT_DIR('.amazonenv'))
+else:
     environ.Env.read_env(ROOT_DIR('.env'))
 
 # APP CONFIGURATION

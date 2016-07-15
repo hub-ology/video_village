@@ -29,28 +29,28 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # django-secure
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('djangosecure', )
+# INSTALLED_APPS += ('djangosecure', )
 
-SECURITY_MIDDLEWARE = (
-    'djangosecure.middleware.SecurityMiddleware',
-)
+# SECURITY_MIDDLEWARE = (
+#     'djangosecure.middleware.SecurityMiddleware',
+# )
 
 
 
 # Make sure djangosecure.middleware.SecurityMiddleware is listed first
-MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + MIDDLEWARE_CLASSES
+# MIDDLEWARE_CLASSES = SECURITY_MIDDLEWARE + MIDDLEWARE_CLASSES
 
 
 # set this to 60 seconds and then to 518400 when you can prove it works
-SECURE_HSTS_SECONDS = 60
-SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
-    'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
-SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
-    'DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
+# SECURE_HSTS_SECONDS = 60
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool(
+#     'DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True)
+# SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
+#     'DJANGO_SECURE_CONTENT_TYPE_NOSNIFF', default=True)
+# SECURE_BROWSER_XSS_FILTER = True
+# SESSION_COOKIE_SECURE = False
+# SESSION_COOKIE_HTTPONLY = True
+# SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 
 # SITE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -58,17 +58,26 @@ SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', 'video-villiage-dev.us-east-1.elasticbeanstalk.com'])
 
-ALLOWED_HOSTS = ['video-village-dev.us-east-1.elasticbeanstalk.com']
-# EC2_PRIVATE_IP = None
-# try:
-#     EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
-# except requests.exceptions.RequestException:
-#     pass
-#
-# if EC2_PRIVATE_IP:
-#     ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
+ALLOWED_HOSTS = ['video.seeingspartanburg.com',
+                 'video-village-dev2.us-east-1.elasticbeanstalk.com']
+EC2_PRIVATE_IP = None
+EC2_AWS_HOST = None
+try:
+    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout=0.01).text
+except requests.exceptions.RequestException:
+    pass
 
-# ALLOWED_HOSTS = ['localhost', 'video-villiage-dev.us-east-1.elasticbeanstalk.com']
+if EC2_PRIVATE_IP:
+    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
+
+try:
+    EC2_AWS_HOST = requests.get('http://169.254.169.254/latest/meta-data/public-hostname', timeout=0.01).text
+except requests.exceptions.RequestException:
+    pass
+
+if EC2_AWS_HOST:
+    ALLOWED_HOSTS.append(EC2_AWS_HOST)
+
 # END SITE CONFIGURATION
 
 # INSTALLED_APPS += ('gunicorn', )
