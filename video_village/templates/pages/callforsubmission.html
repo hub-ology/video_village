@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="display-4">CALL FOR SHORT FILM SUBMISSIONS FOR HIGHLAND VIDEO VILLAGE</h1>
+            <p>The City of Spartanburg, SC is one of four cities selected from across the country, to receive up to
+            one million dollars as part of the Bloomberg Philanthropies Public Art Challenge, a new program to
+            support temporary public art projects that celebrate creativity, enhance urban identity, encourage
+            public-private partnerships, and drive economic development. The City of Spartanburg is working with
+            internationally renowned media-based artist Erwin Redl to create nine temporary public art installations
+            across Spartanburg involving the participation of ten neighborhoods and Video Village is one of these
+            installations.</p>
+
+            <p>Video Village involves the projection of short films (no longer than 5 minutes in duration) onto the second
+            story windows of vacant housing units in the Highlands Neighborhood in Spartanburg, SC. These short films
+            will be visible during the evening hours and programmed to run in sequence and loops. To learn more about
+            this project <a href="https://vimeo.com/135604131">click here</a></p>
+
+            <h2>Exhibition Dates: October 2, 2016 – April 4, 2017</h2>
+            <p>The Directors of Video Village are seeking short films in the following categories:</p>
+            <ul>
+                <li>Abstract Films : often characterized by the absence of linear narrative, the use of various
+                abstracting techniques—out-of-focus, painting or scratching on film, rapid editing. The goal is often to
+                place the viewer in a more active and more thoughtful relationship to the film</li>
+                <li>Animated Films: typically produced by photographing a series of gradually changing drawings, etc. which give
+                the illusion of movement when a series is projected rapidly</li>
+                <li>Documentary Short Films: often examining an event or person based on facts</li>
+                <li>Narrative Short Films: referring to the
+                types of movies that tell a story</li>
+            </ul>
+
+            <h2>Technical requirements</h2>
+            <ul>
+                <li>Frame Rate: 24 p</li>
+                <li>Aspect Ratio: 4 x 3</li>
+                <li>Total running time not to exceed 5 minutes</li>
+                <li>Audio is not required</li>
+                <li>Codec H.264</li>
+            </ul>
+
+
+            <h2>Submission Guidelines</h2>
+            <ul>
+                <li>Completed Application</li>
+                <li>Video Files upload to: <a href="{% url 'videos:videos-add' %}">videovillage.seeingspartanburg.com</a></li>
+            </ul>
+
+            <h2>Jury Process</h2>
+            <p>A panel of jurors includes professionals working in the visuals arts and film making industry, members of
+            the Highlands Neighborhood Association and the City of Spartanburg. Selected participants will need to
+            provide further information for this project including a brief biography, photograph of the director, etc.
+            Selected participants will be notified via email or phone. Any questions regarding the submission process
+            can be directed to Elizabeth Goddard, Executive Director of the Spartanburg Art Museum (864) 582-7616 x.236
+            or <a href="mailto:egoddard@spartanarts.org">egoddard@spartanarts.org</a></p>
+
+            <h2><a class="btn btn-primary btn-block" href="{% url 'videos:videos-add' %}">Submit Video</a></h2>
+
+        </div>
+    </div>
+{% endblock content %}
