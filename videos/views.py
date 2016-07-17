@@ -18,7 +18,8 @@ class VideoViewSet(viewsets.ModelViewSet):
 
 class VideoCreate(CreateView):
     model = Video
-    fields = ['uploader_name', 'email', 'title', 'description', 'file']
+    fields = ['uploader_name', 'email', 'phone', 'address', 'city', 'state', 'zipcode', 'title', 'description',
+              'category', 'file']
     success_url = reverse_lazy('videos:success')
 
 

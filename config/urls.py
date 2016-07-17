@@ -18,8 +18,8 @@ router.register(r'videos', VideoViewSet)
 router.register('schedules', ScheduleViewSet)
 
 urlpatterns = [
-    # url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    url(r'^$', RedirectView.as_view(url=reverse_lazy('videos:videos-add')), name='home'),
+    url(r'^$', TemplateView.as_view(template_name='pages/callforsubmission.html'), name='home'),
+    # url(r'^$', RedirectView.as_view(url=reverse_lazy('videos:videos-add')), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}

@@ -1,12 +1,20 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
+
 
 class Video(models.Model):
     uploader_name = models.CharField(max_length=255, null=False, blank=True)
+    address = models.CharField(max_length=255, null=False, blank=True)
+    city = models.CharField(max_length=255, null=False, blank=True)
+    state = USStateField(null=True, blank=True)
+    zipcode = USZipCodeField(null=True, blank=True)
+    phone = PhoneNumberField(null=True, blank=True)
     file = models.FileField()
     title = models.CharField(max_length=255, null=False, blank=True)
     description = models.TextField(null=False, blank=True)
+    category = models.CharField(choices=[('D', 'Documentary'), ('N', 'Narrative'), ('A', 'Abstract'), ('An', 'Animation')], max_length=2, null=False, blank=True)
     email = models.EmailField()
     approved = models.BooleanField(default=False)
     status = models.CharField(choices=[('a', 'Approved'), ('r', 'Rejected'), ('s', 'Submitted')], max_length=1, default='s')
