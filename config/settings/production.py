@@ -58,7 +58,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', 'video-villiage-dev.us-east-1.elasticbeanstalk.com'])
 
-ALLOWED_HOSTS = ['video.seeingspartanburg.com',
+ALLOWED_HOSTS = ['videovillage.seeingspartanburg.com',
                  'video-village-dev2.us-east-1.elasticbeanstalk.com']
 EC2_PRIVATE_IP = None
 EC2_AWS_HOST = None
