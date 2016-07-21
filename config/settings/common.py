@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'rest_framework',
     'localflavor',
+    'taggit',
 )
 
 # Apps specific for this project go here.
@@ -248,3 +249,4 @@ BROKER_URL = env('CELERY_BROKER_URL', default='django://')
 ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
+TAGGIT_CASE_INSENSITIVE = True

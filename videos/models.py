@@ -1,5 +1,9 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.db.models import Avg
+
+from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
+from taggit.managers import TaggableManager
 
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
 
@@ -21,9 +25,25 @@ class Video(models.Model):
     moderated_by = models.ForeignKey('users.User', null=True, blank=True)
     moderation_notes = models.TextField(null=True, blank=True)
     length = models.IntegerField(null=True, blank=True)
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return ''.join(('Video: ', self.title, ' ', self.uploader_name))
 
     def get_absolute_url(self):
         return reverse('api:video-detail', kwargs={'pk': self.pk})
+
+    @property
+    def score_avg(self):
+        """
+
+        :return: Decimal of the Average Score for the Video
+        """
+        return self.videoscore_set.aggregate(Avg('score')).get('score__avg')
+
+
+class VideoScore(models.Model):
+    user = models.ForeignKey('users.User')
+    video = models.ForeignKey('Video')
+    score = models.IntegerField()
+
