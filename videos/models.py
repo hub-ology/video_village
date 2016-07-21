@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
+from taggit.managers import TaggableManager
 
 
 class Video(models.Model):
@@ -21,6 +22,7 @@ class Video(models.Model):
     moderated_by = models.ForeignKey('users.User', null=True, blank=True)
     moderation_notes = models.TextField(null=True, blank=True)
     length = models.IntegerField(null=True, blank=True)
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return ''.join(('Video: ', self.title, ' ', self.uploader_name))
