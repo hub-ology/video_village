@@ -5,6 +5,8 @@ from django.db.models import Avg
 from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
 from taggit.managers import TaggableManager
 
+from localflavor.us.models import USStateField, USZipCodeField, PhoneNumberField
+
 
 class Video(models.Model):
     uploader_name = models.CharField(max_length=255, null=False, blank=True)
