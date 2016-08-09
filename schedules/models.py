@@ -6,13 +6,21 @@ class Window(models.Model):
     pi = models.ForeignKey('pis.Pi', null=True, blank=True)
 
 
+class Showtime(models.Model):
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+
 class Schedule(models.Model):
     schedule_start_date = models.DateField()
     schedule_end_date = models.DateField()
+    repeat = models.BooleanField(default=False)
+    start_delay = models.BigIntegerField(default=0, blank=True)
     window = models.ForeignKey(Window)
 
     def __str__(self):
-        return self.schedule_date.strftime('%Y-%m-%d') + '  @ Pi:' + str(self.pi)
+        return self.schedule_start_date.strftime('%Y-%m-%d') + '  @ Pi:' + str(self.window.pi.mac_address)
 
     class Meta:
         unique_together = (('schedule_start_date', 'window'),)
