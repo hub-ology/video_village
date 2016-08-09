@@ -17,4 +17,4 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule
-        fields = ('schedule_date', 'pi', 'items')
+        fields = ('schedule_start_date', 'schedule_end_date', 'window', 'items')
