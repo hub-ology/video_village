@@ -27,7 +27,12 @@ def overview(request):
 
     mod_queue = Video.objects.filter(approved=False)
 
+
     t = 'videos/overview.html'
-    c = {'moderation_queue_count': len(mod_queue)}
+    c = {
+        'moderation_queue_count': len(mod_queue),
+        'total_videos': Video.objects.count(),
+        'awaiting_moderation': mod_queue,
+    }
 
     return render(request, t, c)
