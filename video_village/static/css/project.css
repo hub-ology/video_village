@@ -1,5 +1,65 @@
 /* These styles are generated from project.scss. */
 
+
+.card-green {
+    border-color: #5cb85c;
+}
+
+.card-green > .card-header {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.card-green > a {
+    color: #5cb85c;
+}
+
+.card-green > a:hover {
+    color: #3d8b3d;
+}
+
+.card-red {
+    border-color: #d9534f;
+}
+
+.card-red > .card-header {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.card-red > a {
+    color: #d9534f;
+}
+
+.card-red > a:hover {
+    color: #b52b27;
+}
+
+.card-yellow {
+    border-color: #f0ad4e;
+}
+
+.card-yellow > .card-header {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.card-yellow > a {
+    color: #f0ad4e;
+}
+
+.card-yellow > a:hover {
+    color: #df8a13;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
 .alert-debug {
   color: black;
   background-color: white;

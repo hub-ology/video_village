@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = (
     'rest_framework',
     'localflavor',
     'taggit',
+    'django_tables2',
 )
 
 # Apps specific for this project go here.

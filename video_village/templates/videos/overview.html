@@ -1,12 +1,113 @@
 {% extends 'base.html' %}
+{% load django_tables2 %}
 
 {% block content %}
+
     <div class="row">
-        <div class="col-xs-2">
-            <h3><a href="{% url 'videos:moderation' %}">Videos in Moderation Queue</a></h3>
-        </div>
-        <div class="col-xs-2">
-            <h4>{{ moderation_queue_count }}</h4>
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Dashboard <small>videovillage overview</small>
+            </h1>
         </div>
     </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-primary card-inverse">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-video-camera fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">{{ total_videos }}</div>
+                            <div>Total Videos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a href="{% url 'videos:list' %}">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card {% if awaiting_moderation.count > 0 %}card-yellow{% endif %}{% if awaiting_moderation.count <= 0 %}card-green{% endif %}">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-video-camera fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">12</div>
+                            <div>Awaiting Moderation</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a href="{% url 'videos:moderate' %}">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-inverse">
+                <div class="card-header card-primary">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-list fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">0</div>
+                            <div>Schedules</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a href="javascript:;">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-red">
+                <div class="card-header card-red">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-pie-chart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-xs-right">
+                            <div class="huge">0</div>
+                            <div>Pi's</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer card-default">
+                    <a href="javascript:;">
+                        <span class="pull-xs-left">View Details</span>
+                        <span class="pull-xs-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block subcontent %}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>All Videos</h3>
+                {% render_table video_table %}
+            </div>
+        </div>
+    {% endblock subcontent %}
 {% endblock content %}
