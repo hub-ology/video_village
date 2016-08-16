@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 
-from schedules.models import Schedule
-from schedules.serializers import ScheduleSerializer
+from schedules.models import ScheduleItem
+from schedules.serializers import ScheduleItemSerializer
 
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     """
     API Endpoint for videos.
     """
-    queryset = Schedule.objects.all()
-    serializer_class = ScheduleSerializer
+    queryset = ScheduleItem.objects.all()
+    serializer_class = ScheduleItemSerializer
