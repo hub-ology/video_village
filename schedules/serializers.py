@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from videos.serializer import VideoSerializer
-from .models import Schedule, ScheduleItem
+# from .models import Schedule, ScheduleItem
+from .models import ScheduleItem
 
 
 class ScheduleItemSerializer(serializers.ModelSerializer):
@@ -12,9 +13,9 @@ class ScheduleItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ScheduleSerializer(serializers.ModelSerializer):
-    items = ScheduleItemSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Schedule
-        fields = ('schedule_start_date', 'schedule_end_date', 'window', 'items')
+# class ScheduleSerializer(serializers.ModelSerializer):
+#     items = ScheduleItemSerializer(many=True, read_only=True)
+#
+#     class Meta:
+#         model = Schedule
+#         fields = ('schedule_start_date', 'schedule_end_date', 'window', 'items')
