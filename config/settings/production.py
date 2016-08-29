@@ -59,7 +59,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost', 'video-villiage-dev.us-east-1.elasticbeanstalk.com'])
 
 ALLOWED_HOSTS = ['videovillage.seeingspartanburg.com',
-                 'video-village-dev2.us-east-1.elasticbeanstalk.com']
+                 'video-village-dev2.us-east-1.elasticbeanstalk.com',
+                 'videovillage.nyrtrnn6di.us-east-1.elasticbeanstalk.com']
 EC2_PRIVATE_IP = None
 EC2_AWS_HOST = None
 try:
@@ -89,6 +90,7 @@ if EC2_AWS_HOST:
 # See: http://django-storages.readthedocs.io/en/latest/index.html
 INSTALLED_APPS += (
     'storages',
+
 )
 
 AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
@@ -116,7 +118,7 @@ AWS_HEADERS = {
 #  See:http://stackoverflow.com/questions/10390244/
 from storages.backends.s3boto import S3BotoStorage
 StaticRootS3BotoStorage = lambda: S3BotoStorage(location='static')
-MediaRootS3BotoStorage = lambda: S3BotoStorage(location='media')
+MediaRootS3BotoStorage = lambda: S3BotoStorage(bucket_name=AWS_MEDIA_STORAGE_BUCKET_NAME, location='media')
 DEFAULT_FILE_STORAGE = 'config.settings.production.MediaRootS3BotoStorage'
 
 MEDIA_URL = 'https://s3.amazonaws.com/%s/media/' % AWS_MEDIA_STORAGE_BUCKET_NAME
