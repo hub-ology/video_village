@@ -3,6 +3,7 @@ from rest_framework import viewsets
 
 from schedules.models import ScheduleItem, WindowShow
 from schedules.serializers import ScheduleItemSerializer, WindowShowSerializer
+from video_village.authentication import PiAuthentication
 
 
 class ScheduleViewSet(viewsets.ModelViewSet):
@@ -16,6 +17,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 class WindowShowViewSet(viewsets.ModelViewSet):
     queryset = WindowShow.objects.all()
     serializer_class = WindowShowSerializer
+    authentication_classes = (PiAuthentication,)
 
 
     def get_queryset(self):
@@ -29,7 +31,7 @@ class WindowShowViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(show=show)
 
         if window:
-            queryset = queryset.filter(window=window)
+            queryset = queryset.filter(window__id=window)
 
         if mac_address:
             queryset = queryset.filter(window__pi__mac_address=mac_address)
