@@ -21,10 +21,17 @@ class WindowShowViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         show_date = self.request.query_params.get('show_date', None)
         window = self.request.query_params.get('window', None)
+        mac_address = self.request.query_params.get('mac', None)
 
         queryset = WindowShow.objects.all()
-        if show_date and window:
+        if show_date:
             show = ScheduleItem.objects.filter(date=show_date).values_list('show').first()[0]
-            queryset = WindowShow.objects.filter(show=show, window__id=window)
+            queryset = queryset.filter(show=show)
+
+        if window:
+            queryset = queryset.filter(window=window)
+
+        if mac_address:
+            queryset = queryset.filter(window__pi__mac_address=mac_address)
 
         return queryset
