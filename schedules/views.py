@@ -27,7 +27,11 @@ class WindowShowViewSet(viewsets.ModelViewSet):
 
         queryset = WindowShow.objects.all()
         if show_date:
-            show = ScheduleItem.objects.filter(date=show_date).values_list('show').first()[0]
+            show_items = ScheduleItem.objects.filter(date=show_date).values_list('show').first()
+            if show_items:
+                show = show_items[0]
+            else:
+                show = None
             queryset = queryset.filter(show=show)
 
         if window:

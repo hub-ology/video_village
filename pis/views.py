@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.decorators import list_route, authentication_classes
+from rest_framework.decorators import list_route, authentication_classes, \
+    detail_route
 from rest_framework.response import Response
 
 from video_village.authentication import PiAuthentication
@@ -28,3 +29,14 @@ class PiViewSet(viewsets.ModelViewSet):
         return_data = PiSerializer(pi).data
         return_data['new_pi'] = created
         return Response(return_data)
+
+    @detail_route(methods=['post'], )
+    def status(self, request, pk=None):
+
+        pi = self.get_object()
+        data = request.data
+        pi.status = data
+        pi.save()
+
+        return Response('OK')
+
