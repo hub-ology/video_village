@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import list_route, authentication_classes, \
@@ -30,12 +32,12 @@ class PiViewSet(viewsets.ModelViewSet):
         return_data['new_pi'] = created
         return Response(return_data)
 
-    @detail_route(methods=['post'], )
-    def status(self, request, pk=None):
-
-        pi = self.get_object()
+    @list_route(methods=['post'], )
+    def status(self, request):
         data = request.data
-        pi.status = data
+
+        pi = Pi.objects.get(mac_address=data.get('mac_address'))
+        pi.status = json.dumps(data.get('status'))
         pi.save()
 
         return Response('OK')
