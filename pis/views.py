@@ -32,13 +32,13 @@ class PiViewSet(viewsets.ModelViewSet):
         return_data['new_pi'] = created
         return Response(return_data)
 
-    @list_route(methods=['post'], )
-    def status(self, request):
+    @detail_route(methods=['post'], )
+    def status(self, request, pk=None):
+        pi = self.get_object()
         data = request.data
-
-        pi = Pi.objects.get(mac_address=data.get('mac_address'))
-        pi.status = json.dumps(data.get('status'))
-        pi.save()
+        if data:
+            pi.status = json.dumps(data)
+            pi.save()
 
         return Response('OK')
 
