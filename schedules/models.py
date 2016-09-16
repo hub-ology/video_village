@@ -114,15 +114,15 @@ class ScheduleItem(models.Model):
     """
 
     date = models.DateField(default=now, help_text="The date of a show")
-    time = models.TimeField(default=time(0, 0, 0), help_text="The time a show starts")
-    stop_time = models.TimeField(default=time(0,0,0), help_text="The time a show stops")
+    start_time = models.TimeField(default=time(0, 0, 0), help_text="The time a show starts")
+    stop_time = models.TimeField(default=time(0, 0, 0), help_text="The time a show stops")
     show = models.ForeignKey(Show, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} {} - Show id {}".format(self.date, self.time, str(self.show))
 
     class Meta(object):
-        ordering = ('date', 'time', )
+        ordering = ('date', 'start_time', )
 
 # from django.db import models
 #
