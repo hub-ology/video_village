@@ -6,6 +6,7 @@ from rest_framework.decorators import list_route, authentication_classes, \
     detail_route
 from rest_framework.response import Response
 
+from schedules.models import Window
 from video_village.authentication import PiAuthentication
 from .models import Pi
 from .serializers import PiSerializer
@@ -42,3 +43,18 @@ class PiViewSet(viewsets.ModelViewSet):
 
         return Response('OK')
 
+    @detail_route(methods=['post'],)
+    def assign(self, request, pk=None):
+        """
+        Assign the Pi to a Window
+        """
+        pi = self.get_object()
+        data = request.data
+
+        window_number = data.get('window')
+
+        if window_number:
+            window = Window.objects.get(pk=window_number)
+            window.pi = pi
+            window.save()
+        return Response('OK')

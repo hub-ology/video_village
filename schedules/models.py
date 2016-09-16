@@ -98,6 +98,7 @@ class WindowShow(models.Model):
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE, help_text="The playlist to display in this window")
     offset_in_show = models.PositiveIntegerField(default=0, help_text="The number of seconds from the start of the show to delay playing this playlist in this window")
     repeats = models.PositiveIntegerField(default=1, help_text="The number of times to play the playlist (e.g., 1 means play it once)")
+    loop = models.BooleanField(default=False, help_text="Should the WindowShow loop until the stop time?")
 
     def __str__(self):
         return "{}: {} [offset {}] {} (repeats: {})".format(self.window, self.show, self.offset_in_show,
@@ -113,14 +114,15 @@ class ScheduleItem(models.Model):
     """
 
     date = models.DateField(default=now, help_text="The date of a show")
-    time = models.TimeField(default=time(0, 0, 0), help_text="The time a show starts")
+    start_time = models.TimeField(default=time(0, 0, 0), help_text="The time a show starts")
+    stop_time = models.TimeField(default=time(0, 0, 0), help_text="The time a show stops")
     show = models.ForeignKey(Show, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{} {} - Show id {}".format(self.date, self.time, str(self.show))
 
     class Meta(object):
-        ordering = ('date', 'time', )
+        ordering = ('date', 'start_time', )
 
 # from django.db import models
 #
