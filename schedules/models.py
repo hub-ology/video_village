@@ -119,7 +119,7 @@ class ScheduleItem(models.Model):
     show = models.ForeignKey(Show, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{} {} - Show id {}".format(self.date, self.time, str(self.show))
+        return "{} {} - Show id {}".format(self.date, self.start_time, str(self.show))
 
     class Meta(object):
         ordering = ('date', 'start_time', )
