@@ -68,6 +68,8 @@ class VideoSegment(models.Model):
     offset_in_playlist = models.PositiveIntegerField(help_text="The number of seconds from the start of the playlist to begin playing a video")
     offset_in_video = models.PositiveIntegerField(default=0, help_text="The number of seconds from the start of the video to begin playing")
     duration = models.PositiveIntegerField(help_text="the length of the video to play (in seconds)")
+    lower_third = models.BooleanField(default=False)
+    lower_third_duration = models.IntegerField(default=0, null=True, blank=True, help_text="The length of time to show lower third (in seconds)")
     playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
 
     def __str__(self):
