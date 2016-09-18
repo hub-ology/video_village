@@ -20,8 +20,8 @@ class Pi(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
 
-        super(Pi, self).save()
         self.parse_status()
+        super(Pi, self).save()
 
     def parse_status(self):
         if self.status:
@@ -29,7 +29,11 @@ class Pi(models.Model):
             projector = status_data.get('projector')
             if projector:
                 self.projector_connected = projector.get('connected')
-                self.projector_on = projector.get('on')
+                projector_on = projector.get('on')
+                if projector_on:
+                    self.projector_on = True
+                else:
+                    self.projector_on = False
 
             tunnels = status_data.get('tunnels')
             if tunnels:
