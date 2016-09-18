@@ -2,9 +2,25 @@
 
 {% block content %}
     <h2>Windows</h2>
-    <ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Window</th>
+                <th>Tunnel URL</th>
+                <th>Projector Connected</th>
+                <th>Projector On</th>
+                <th>CPU Temp</th>
+            </tr>
+        </thead>
         {% for window in object_list %}
-            <li>{{ window.pk }} - {{ window.pi.status }}</li>
+            <tr>
+                <td>{{ window.pk }}</td>
+                <td>{{ window.pi.tunnel }}</td>
+                <td class="{% if window.pi.projector_connected %}table-success {% else %}table-danger {% endif %}">{{ window.pi.projector_connected }}</td>
+                <td class="{% if window.pi.projector_on %}table-success {% else %}table-danger {% endif %}">{{ window.pi.projector_on }}</td>
+                <td>{{ window.pi.cpu_temp }}</td>
+            </tr>
+
         {% endfor %}
-    </ul>
+    </table>
 {% endblock %}
