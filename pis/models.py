@@ -13,6 +13,7 @@ class Pi(models.Model):
     projector_connected = models.BooleanField(default=False)
     projector_on = models.BooleanField(default=False)
     playlist_active = models.BooleanField(default=False)
+    cpu_temp = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
 
     def __str__(self):
         return "Pi {}: {}".format(self.id, self.mac_address)
@@ -38,6 +39,11 @@ class Pi(models.Model):
             tunnels = status_data.get('tunnels')
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
+
+            try:
+                self.cpu_temp = status_data.get('cpu_temp')
+            except:
+                pass
 
     def turn_projector_on(self):
         if self.tunnel:
