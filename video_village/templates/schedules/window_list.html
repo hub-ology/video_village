@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Windows</h2>
+    <ul>
+        {% for window in object_list %}
+            <li>{{ window.pk }} - {{ window.pi.status }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

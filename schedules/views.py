@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from rest_framework import viewsets
 
-from schedules.models import ScheduleItem, WindowShow
+from schedules.models import ScheduleItem, WindowShow, Window
 from schedules.serializers import ScheduleItemSerializer, WindowShowSerializer
 from video_village.authentication import PiAuthentication
 
@@ -41,3 +42,7 @@ class WindowShowViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(window__pi__mac_address=mac_address)
 
         return queryset
+
+
+class WindowList(ListView):
+    model = Window
