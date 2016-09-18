@@ -13,6 +13,7 @@ class Pi(models.Model):
     projector_connected = models.BooleanField(default=False)
     projector_on = models.BooleanField(default=False)
     playlist_active = models.BooleanField(default=False)
+    cpu_temp = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
 
     def __str__(self):
         return "Pi {}: {}".format(self.id, self.mac_address)
@@ -20,8 +21,8 @@ class Pi(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
 
-        super(Pi, self).save()
         self.parse_status()
+        super(Pi, self).save()
 
     def parse_status(self):
         if self.status:
@@ -29,11 +30,20 @@ class Pi(models.Model):
             projector = status_data.get('projector')
             if projector:
                 self.projector_connected = projector.get('connected')
-                self.projector_on = projector.get('on')
+                projector_on = projector.get('on')
+                if projector_on:
+                    self.projector_on = True
+                else:
+                    self.projector_on = False
 
             tunnels = status_data.get('tunnels')
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
+
+            try:
+                self.cpu_temp = status_data.get('cpu_temp')
+            except:
+                pass
 
     def turn_projector_on(self):
         if self.tunnel:

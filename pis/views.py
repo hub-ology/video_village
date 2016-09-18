@@ -1,6 +1,7 @@
 import json
 
 from django.shortcuts import render
+from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework.decorators import list_route, authentication_classes, \
     detail_route
