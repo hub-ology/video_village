@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Window {{ object.pk }}</h2>
+    <h3>Location:</h3>
+    <p>Building - {{ object.building }}</p>
+    <p>Notes - {{ object.notes }}</p>
+    <h3>Pi</h3>
+    <p>mac address - {{ object.pi.mac_address }}</p>
+
+    <h3>Projector</h3>
+    <p>Projector Connected - {{ object.pi.projector_connected }}</p>
+    <p>Projector On - {{ object.pi.projector_on }}</p>
+    <p>
+        {{ object.status }}
+    </p>
+{% endblock %}

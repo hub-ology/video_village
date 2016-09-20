@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
 
@@ -45,4 +46,9 @@ class WindowShowViewSet(viewsets.ModelViewSet):
 
 
 class WindowList(ListView):
+    model = Window
+    ordering = 'pk'
+
+
+class WindowDetail(DetailView):
     model = Window
