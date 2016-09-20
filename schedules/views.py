@@ -19,13 +19,13 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 class WindowShowViewSet(viewsets.ModelViewSet):
     queryset = WindowShow.objects.all()
     serializer_class = WindowShowSerializer
-    authentication_classes = (PiAuthentication,)
+    # authentication_classes = (PiAuthentication,)
 
 
     def get_queryset(self):
         show_date = self.request.query_params.get('show_date', None)
         window = self.request.query_params.get('window', None)
-        mac_address = self.request.query_params.get('mac', None)
+        mac_address = self.request.query_params.get('mac_address', None)
 
         queryset = WindowShow.objects.all()
         if show_date:
