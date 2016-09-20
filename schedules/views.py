@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
 
@@ -24,7 +25,7 @@ class WindowShowViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         show_date = self.request.query_params.get('show_date', None)
         window = self.request.query_params.get('window', None)
-        mac_address = self.request.query_params.get('mac', None)
+        mac_address = self.request.query_params.get('mac_address', None)
 
         queryset = WindowShow.objects.all()
         if show_date:
@@ -45,4 +46,9 @@ class WindowShowViewSet(viewsets.ModelViewSet):
 
 
 class WindowList(ListView):
+    model = Window
+    ordering = 'pk'
+
+
+class WindowDetail(DetailView):
     model = Window

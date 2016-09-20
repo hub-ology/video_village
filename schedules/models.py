@@ -15,8 +15,7 @@ A show can be used many times, too. For example, the same show
 might run for three nights in a row--the artist would create one
 show and then associate it with three schedule items.
 """
-
-
+from django.core.urlresolvers import reverse
 from django.db import models
 from videos.models import Video
 from django.utils.timezone import now
@@ -33,6 +32,9 @@ class Window(models.Model):
 
     def __str__(self):
         return "Building {} - {}".format(self.building, self.description)
+
+    def get_absolute_url(self):
+        return reverse('windows:detail', args=[str(self.id)])
 
     class Meta(object):
         ordering = ('building',)

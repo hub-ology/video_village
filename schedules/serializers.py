@@ -1,9 +1,7 @@
 from rest_framework import serializers
 
 from videos.serializer import VideoSerializer
-# from .models import Schedule, ScheduleItem
 from .models import ScheduleItem, WindowShow, Playlist, VideoSegment, Show
-
 
 class ScheduleItemSerializer(serializers.ModelSerializer):
     # video = VideoSerializer()
