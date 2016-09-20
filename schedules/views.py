@@ -19,7 +19,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 class WindowShowViewSet(viewsets.ModelViewSet):
     queryset = WindowShow.objects.all()
     serializer_class = WindowShowSerializer
-    # authentication_classes = (PiAuthentication,)
+    authentication_classes = (PiAuthentication,)
 
 
     def get_queryset(self):
