@@ -59,3 +59,18 @@ class PiViewSet(viewsets.ModelViewSet):
             window.pi = pi
             window.save()
         return Response('OK')
+
+    @detail_route(methods=['post'], )
+    def projector_on(self, request, pk=None):
+        pi = self.get_object()
+        return Response(pi.turn_projector_on())
+
+    @detail_route(methods=['post'], )
+    def projector_off(self, request, pk=None):
+        pi = self.get_object()
+        return Response(pi.turn_projector_off())
+
+    @detail_route(methods=['get'],)
+    def get_status(self, request, pk=None):
+        pi = self.get_object()
+        return Response(pi.get_status())

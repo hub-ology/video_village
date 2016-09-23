@@ -257,3 +257,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+NGROK_AUTH_USER = env('NGROK_AUTH_USER', default='')
+NGROK_AUTH_TOKEN = env('NGROK_AUTH_TOKEN', default='')
