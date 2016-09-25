@@ -43,7 +43,8 @@ class Pi(models.Model):
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
                 try:
-                    self.ssh_tunnel = tunnels.get('ssh')
+                    if tunnels.get('ssh'):
+                        self.ssh_tunnel = tunnels.get('ssh')
                 except:
                     pass
 
