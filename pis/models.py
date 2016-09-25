@@ -43,7 +43,7 @@ class Pi(models.Model):
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
                 try:
-                    self.tunnel = tunnels.get('ssh')
+                    self.ssh_tunnel = tunnels.get('ssh')
                 except:
                     pass
 
@@ -79,7 +79,16 @@ class Pi(models.Model):
 
     def play(self, video=None, playlist=None, loop=False, start_time=None, end_time=None):
         if self.tunnel:
-            r = requests.post(self.tunnel + '/play', auth=NGROK_AUTH)
+
+            if video:
+                data = {'video':video.url}
+            else:
+                videos = [{'video': v.url} for v in playlist]
+                data = {'playlist': videos, 'start_time': start_time, 'end_time': end_time, 'loop': loop}
+
+            r = requests.post(self.tunnel + '/play', auth=NGROK_AUTH, json=data)
+
+            return r.json()
 
 
 class CacheFile(models.Model):
