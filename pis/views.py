@@ -3,7 +3,7 @@ import json
 from django.shortcuts import render
 from django.views.generic import ListView
 from rest_framework import viewsets
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.decorators import list_route, authentication_classes, \
     detail_route
 from rest_framework.response import Response
@@ -20,7 +20,7 @@ class PiViewSet(viewsets.ModelViewSet):
     """
     queryset = Pi.objects.all()
     serializer_class = PiSerializer
-    authentication_classes = (PiAuthentication, BasicAuthentication, )
+    authentication_classes = (PiAuthentication, SessionAuthentication, )
 
     @list_route(methods=['post'], )
     def register(self, request):
