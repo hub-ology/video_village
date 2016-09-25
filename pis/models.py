@@ -5,6 +5,7 @@ import requests
 from django.db import models
 from django.conf import settings
 
+NGROK_AUTH = (settings.NGROK_AUTH_USER, settings.NGROK_AUTH_TOKEN)
 
 class Pi(models.Model):
     mac_address = models.CharField(max_length=255)
@@ -41,6 +42,10 @@ class Pi(models.Model):
             tunnels = status_data.get('tunnels')
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
+                try:
+                    self.tunnel = tunnels.get('ssh')
+                except:
+                    pass
 
             try:
                 self.cpu_temp = status_data.get('cpu_temp')
@@ -59,18 +64,22 @@ class Pi(models.Model):
 
     def turn_projector_on(self):
         if self.tunnel:
-            r = requests.post(self.tunnel + '/projector/on', auth=(settings.NGROK_AUTH_USER, settings.NGROK_AUTH_TOKEN))
+            r = requests.post(self.tunnel + '/projector/on', auth=NGROK_AUTH)
             return r.json()
 
     def turn_projector_off(self):
         if self.tunnel:
-            r = requests.post(self.tunnel + '/projector/off', auth=(settings.NGROK_AUTH_USER, settings.NGROK_AUTH_TOKEN))
+            r = requests.post(self.tunnel + '/projector/off', auth=NGROK_AUTH)
             return r.json()
 
     def get_status(self):
         if self.tunnel:
-            r = requests.get(self.tunnel + '/status', auth=(settings.NGROK_AUTH_USER, settings.NGROK_AUTH_TOKEN))
+            r = requests.get(self.tunnel + '/status', auth=NGROK_AUTH)
             return r.json()
+
+    def play(self, video=None, playlist=None, loop=False, start_time=None, end_time=None):
+        if self.tunnel:
+            r = requests.post(self.tunnel + '/play', auth=NGROK_AUTH)
 
 
 class CacheFile(models.Model):

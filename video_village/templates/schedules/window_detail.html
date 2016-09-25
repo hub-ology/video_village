@@ -26,7 +26,7 @@
         <h3>Files</h3>
         <table class="table table-bordered">
             {% for f in object.pi.cachefile_set.all %}
-                <tr><td>{{ f }}</td></tr>
+                <tr><td>{{ f.file_name }}</td><td><a class="btn btn-default">Play</a></td></tr>
             {% endfor %}
         </table>
     </div>
