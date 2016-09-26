@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="row">
+        <a class="btn btn-success" href="{% url 'windows:all_on' %}">All Projectors On</a>
+        <a class="btn btn-danger" href="{% url 'windows:all_off' %}">All Projectors Off</a>
+    </div>
     <h2>Windows</h2>
     <table class="table">
         <thead>

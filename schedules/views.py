@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic import ListView
@@ -52,3 +54,17 @@ class WindowList(ListView):
 
 class WindowDetail(DetailView):
     model = Window
+
+
+@login_required()
+def all_windows_projector_on(request):
+    for window in Window.objects.all():
+        window.pi.turn_projector_on()
+    return JsonResponse({'status': 'OK'})
+
+
+@login_required()
+def all_windows_projector_off(request):
+    for window in Window.objects.all():
+        window.pi.turn_projector_off()
+    return JsonResponse({'status': 'OK'})
