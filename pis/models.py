@@ -17,6 +17,10 @@ class Pi(models.Model):
     playlist_active = models.BooleanField(default=False)
     cpu_temp = models.DecimalField(max_digits=6, decimal_places=3, null=True, blank=True)
     ssh_tunnel = models.CharField(max_length=255, null=False, blank=True)
+    software_version = models.CharField(max_length=10, null=False, blank=True)
+    file_cache_size = models.CharField(max_length=10, null=False, blank=True)
+    sd_available_space = models.CharField(max_length=10, null=False, blank=True)
+    local_ip_address = models.GenericIPAddressField(null=True, blank=True)
 
     def __str__(self):
         return "Pi {}: {}".format(self.id, self.mac_address)
@@ -30,6 +34,15 @@ class Pi(models.Model):
     def parse_status(self):
         if self.status:
             status_data = json.loads(self.status)
+            version = status_data.get('version')
+            if version:
+                self.software_version = version
+
+            sd_card = status_data.get('sd_card')
+            if sd_card:
+                self.file_cache_size = sd_card.get('file_cache')
+                self.sd_available_space = sd_card.get('available')
+            self.local_ip_address = status_data.get('ip_address')
             projector = status_data.get('projector')
             if projector:
                 self.projector_connected = projector.get('connected')
@@ -43,7 +56,8 @@ class Pi(models.Model):
             if tunnels:
                 self.tunnel = tunnels.get('pivideo')
                 try:
-                    self.ssh_tunnel = tunnels.get('ssh')
+                    if tunnels.get('ssh'):
+                        self.ssh_tunnel = tunnels.get('ssh')
                 except:
                     pass
 
