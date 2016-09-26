@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="row">
+        <a class="btn btn-success" href="{% url 'windows:all_on' %}">All Projectors On</a>
+        <a class="btn btn-danger" href="{% url 'windows:all_off' %}">All Projectors Off</a>
+    </div>
     <h2>Windows</h2>
     <table class="table">
         <thead>
@@ -11,6 +15,7 @@
                 <th>Projector Connected</th>
                 <th>Projector On</th>
                 <th>CPU Temp</th>
+                <th>Software Version</th>
             </tr>
         </thead>
         {% for window in object_list %}
@@ -21,6 +26,7 @@
                 <td class="{% if window.pi.projector_connected %}table-success {% else %}table-danger {% endif %}">{{ window.pi.projector_connected }}</td>
                 <td class="{% if window.pi.projector_on %}table-success {% else %}table-danger {% endif %}">{{ window.pi.projector_on }}</td>
                 <td>{{ window.pi.cpu_temp }}</td>
+                <td>{{ window.pi.software_version }}</td>
             </tr>
 
         {% endfor %}
