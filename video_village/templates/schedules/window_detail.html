@@ -17,8 +17,8 @@
     <div class="col-xs">
         <h3>Actions:</h3>
         <ul>
-            <li><a class="btn btn-success" href="{% url 'pi:pi-projector-on' pk=object.pi.pk %}">Turn Projector On</a></li>
-            <li><a class="btn btn-danger" href="{% url 'api:pi-projector-off' pk=object.pi.pk %}">Turn Projector Off</a></li>
+            <li><a class="btn btn-success" href="{% url 'pis:projector_on' pk=object.pi.pk %}">Turn Projector On</a></li>
+            <li><a class="btn btn-danger" href="{% url 'pis:projector_off' pk=object.pi.pk %}">Turn Projector Off</a></li>
             <li><a class="btn btn-primary" href="{% url 'api:pi-get-status' pk=object.pi.pk %}">Get Status</a></li>
         </ul>
     </div>

@@ -1,5 +1,7 @@
 import json
 
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.views.generic import ListView
 from rest_framework import viewsets
@@ -75,3 +77,15 @@ class PiViewSet(viewsets.ModelViewSet):
     def get_status(self, request, pk=None):
         pi = self.get_object()
         return Response(pi.get_status())
+
+@login_required()
+def projector_off(request, pk):
+    pi = Pi.objects.get(pk=pk)
+    pi.turn_projector_off()
+    return Response('OK')
+
+@login_required()
+def projector_on(request, pk):
+    pi = Pi.objects.get(pk=pk)
+    pi.turn_projector_on()
+    return Response('OK')

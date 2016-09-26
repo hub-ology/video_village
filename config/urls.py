@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^videos/', include('videos.urls', namespace='videos')),
 
     url(r'windows/', include('schedules.urls', namespace='windows')),
+    url(r'pis/', include('pis.urls', namespace='pis')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
