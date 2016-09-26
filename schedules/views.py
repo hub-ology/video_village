@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
 
-from schedules.models import ScheduleItem, WindowShow, Window
+from schedules.models import ScheduleItem, WindowShow, Window, Show
 from schedules.serializers import ScheduleItemSerializer, WindowShowSerializer
 from video_village.authentication import PiAuthentication
 
@@ -55,6 +55,13 @@ class WindowList(ListView):
 class WindowDetail(DetailView):
     model = Window
 
+
+class ShowList(ListView):
+    model = Show
+    ordering = 'pk'
+
+class ShowDetail(DetailView):
+    model = Show
 
 @login_required()
 def all_windows_projector_on(request):

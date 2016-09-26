@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Shows</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Show</th>
+                <th>Name</th>
+                <th>Window Count</th>
+            </tr>
+        </thead>
+        {% for show in object_list %}
+            <tr>
+                <td><a href="{{ show.get_absolute_url }}">{{ show.pk }}</td>
+                <td>{{ show.notes }}</td>
+                <td>{{ show.windowshow_set.count }}</td>
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}

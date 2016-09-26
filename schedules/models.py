@@ -91,6 +91,9 @@ class Show(models.Model):
     def __str__(self):
         return "{:4}: {}".format(self.id, self.notes)
 
+    def get_absolute_url(self):
+        return reverse('windows:show_detail', args=[str(self.id)])
+
 
 class WindowShow(models.Model):
     """

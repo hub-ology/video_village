@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <h2>Show: {{ object.notes }}</h2>
+    {% for d in object.scheduleitem_set.all %}
+        <p>{{ d.date }} - {{ d.start_time }} to {{ d.stop_time }}</p>
+    {% endfor %}
+    <div class="row">
+        <div class="col-xs-6">
+            <h3>Windows:</h3>
+            {% for w in object.windowshow_set.all %}
+                <p>{{ w.window }}</p>
+            {% endfor %}
+        </div>
+        <div class="col-xs-6">
+            <img class="img-fluid" src="{% static 'images/floorplan.png' %}">
+        </div>
+    </div>
+
+{% endblock %}
