@@ -81,11 +81,9 @@ class PiViewSet(viewsets.ModelViewSet):
 @login_required()
 def projector_off(request, pk):
     pi = Pi.objects.get(pk=pk)
-    pi.turn_projector_off()
-    return Response('OK')
+    return Response(pi.turn_projector_off())
 
 @login_required()
 def projector_on(request, pk):
     pi = Pi.objects.get(pk=pk)
-    pi.turn_projector_on()
-    return Response('OK')
+    return Response(pi.turn_projector_on())
