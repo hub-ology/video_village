@@ -76,3 +76,15 @@ def all_windows_projector_off(request):
     for window in Window.objects.all():
         window.pi.turn_projector_off()
     return JsonResponse({'status': 'OK'})
+
+@login_required()
+def all_windows_cache_clear(request):
+    for window in Window.objects.all():
+        window.pi.clear_cache()
+    return JsonResponse({'status': 'OK'})
+
+@login_required()
+def all_windows_sync(request):
+    for window in Window.objects.all():
+        window.pi.sync()
+    return JsonResponse({'status': 'OK'})
