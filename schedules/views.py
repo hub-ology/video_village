@@ -37,6 +37,7 @@ class WindowShowViewSet(viewsets.ModelViewSet):
             else:
                 show = None
             queryset = queryset.filter(show=show)
+            queryset = queryset.filter(show__scheduleitem__date=show_date)
 
         if window:
             queryset = queryset.filter(window__id=window)
