@@ -22,7 +22,7 @@
         </thead>
         {% for window in object_list %}
             <tr>
-                <td><a href="{{ window.get_absolute_url }}">{{ window.pk }}</td>
+                <td><a href="{{ window.get_absolute_url }}">{{ window.pk }}</a></td>
                 <td>{{ window.pi.tunnel }}</td>
                 <td>{{ window.pi.ssh_tunnel }}</td>
                 <td class="{% if window.pi.projector_connected %}table-success {% else %}table-danger {% endif %}">{{ window.pi.projector_connected }}</td>
