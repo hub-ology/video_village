@@ -104,6 +104,18 @@ class Pi(models.Model):
 
             return r.json()
 
+    def sync(self):
+        if self.tunnel:
+            r = requests.post(self.tunnel + '/sync', auth=NGROK_AUTH)
+
+            return r.json()
+
+    def clear_cache(self):
+        if self.tunnel:
+            r = requests.delete(self.tunnel + '/cache', auth=NGROK_AUTH)
+            return r.json()
+
+
 
 class CacheFile(models.Model):
     pi = models.ForeignKey(Pi)

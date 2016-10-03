@@ -5,7 +5,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
 
-from schedules.models import ScheduleItem, WindowShow, Window
+from schedules.models import ScheduleItem, WindowShow, Window, Show
 from schedules.serializers import ScheduleItemSerializer, WindowShowSerializer
 from video_village.authentication import PiAuthentication
 
@@ -37,6 +37,7 @@ class WindowShowViewSet(viewsets.ModelViewSet):
             else:
                 show = None
             queryset = queryset.filter(show=show)
+            queryset = queryset.filter(show__scheduleitem__date=show_date)
 
         if window:
             queryset = queryset.filter(window__id=window)
@@ -56,6 +57,13 @@ class WindowDetail(DetailView):
     model = Window
 
 
+class ShowList(ListView):
+    model = Show
+    ordering = 'pk'
+
+class ShowDetail(DetailView):
+    model = Show
+
 @login_required()
 def all_windows_projector_on(request):
     for window in Window.objects.all():
@@ -67,4 +75,16 @@ def all_windows_projector_on(request):
 def all_windows_projector_off(request):
     for window in Window.objects.all():
         window.pi.turn_projector_off()
+    return JsonResponse({'status': 'OK'})
+
+@login_required()
+def all_windows_cache_clear(request):
+    for window in Window.objects.all():
+        window.pi.clear_cache()
+    return JsonResponse({'status': 'OK'})
+
+@login_required()
+def all_windows_sync(request):
+    for window in Window.objects.all():
+        window.pi.sync()
     return JsonResponse({'status': 'OK'})
