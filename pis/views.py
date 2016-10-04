@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from rest_framework import viewsets
@@ -81,9 +82,9 @@ class PiViewSet(viewsets.ModelViewSet):
 @login_required()
 def projector_off(request, pk):
     pi = Pi.objects.get(pk=pk)
-    return Response(pi.turn_projector_off())
+    return JsonResponse(pi.turn_projector_off())
 
 @login_required()
 def projector_on(request, pk):
     pi = Pi.objects.get(pk=pk)
-    return Response(pi.turn_projector_on())
+    return JsonResponse(pi.turn_projector_on())
