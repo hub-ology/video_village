@@ -115,6 +115,13 @@ class Pi(models.Model):
             r = requests.delete(self.tunnel + '/cache', auth=NGROK_AUTH)
             return r.json()
 
+    def stream(self, url):
+        if self.tunnel:
+            data = {'video': url}
+            r = requests.post(self.tunnel + '/stream', auth=NGROK_AUTH, json=data)
+
+            return r.json()
+
 
 
 class CacheFile(models.Model):
