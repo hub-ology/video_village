@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 
 from schedules.forms import StreamForm
 from schedules.models import ScheduleItem, WindowShow, Window, Show
@@ -23,6 +24,15 @@ class WindowShowViewSet(viewsets.ModelViewSet):
     queryset = WindowShow.objects.all()
     serializer_class = WindowShowSerializer
     authentication_classes = (PiAuthentication,)
+
+    def get_serializer_context(self):
+        context = {}
+        show_date = self.request.query_params.get('show_date', None)
+        if show_date:
+            context = {'date': self.request.query_params.get('show_date')}
+
+        return context
+
 
 
     def get_queryset(self):
