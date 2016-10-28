@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
 
 from videos.serializer import VideoSerializer
 from .models import ScheduleItem, WindowShow, Playlist, VideoSegment, Show
@@ -36,12 +37,24 @@ class PlaylistSerializer(serializers.ModelSerializer):
 
 
 class WindowShowSerializer(serializers.ModelSerializer):
-    show = ShowSerializer()
+    show = SerializerMethodField()
     playlist = PlaylistSerializer()
 
     class Meta:
         model = WindowShow
         fields = '__all__'
+
+    def get_show(self, obj):
+        # return {'test': 'test'}
+        dte = self.context.get('date', None)
+        if dte:
+            si = ScheduleItem.objects.filter(date=dte)
+        else:
+            si = ScheduleItem.objects.all()
+        serializer = ScheduleItemSerializer(si, many=True)
+        data = {'scheduleitem_set': serializer.data}
+
+        return data
 
 
 # class ScheduleSerializer(serializers.ModelSerializer):

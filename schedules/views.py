@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
 
+from schedules.forms import StreamForm
 from schedules.models import ScheduleItem, WindowShow, Window, Show
 from schedules.serializers import ScheduleItemSerializer, WindowShowSerializer
 from video_village.authentication import PiAuthentication
@@ -22,6 +24,15 @@ class WindowShowViewSet(viewsets.ModelViewSet):
     queryset = WindowShow.objects.all()
     serializer_class = WindowShowSerializer
     authentication_classes = (PiAuthentication,)
+
+    def get_serializer_context(self):
+        context = {}
+        show_date = self.request.query_params.get('show_date', None)
+        if show_date:
+            context = {'date': self.request.query_params.get('show_date')}
+
+        return context
+
 
 
     def get_queryset(self):
@@ -88,3 +99,17 @@ def all_windows_sync(request):
     for window in Window.objects.all():
         window.pi.sync()
     return JsonResponse({'status': 'OK'})
+
+
+@login_required()
+def all_windows_stream(request):
+    form = StreamForm(request.POST or None)
+    if form.is_valid():
+        windows = form.cleaned_data['windows']
+        url = form.cleaned_data['stream_url']
+        for w in windows:
+            window = Window.object.get(pk=w)
+            window.pi.stream(url)
+
+    t = 'schedules/stream.html'
+    return render(request, t, {'form': form})
