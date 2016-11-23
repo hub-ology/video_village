@@ -39,6 +39,10 @@ class PlaylistAdmin(admin.ModelAdmin):
     inlines = [VideoSegmentInline,]
 
 
+class ScheduleItemAdmin(admin.ModelAdmin):
+    model = ScheduleItem
+    save_as = True
+
 
 
 # admin.site.register(Window)  # Registered in video_village/pis
@@ -46,4 +50,4 @@ admin.site.register(Playlist, PlaylistAdmin)
 admin.site.register(VideoSegment)
 admin.site.register(Show, ShowAdmin)
 admin.site.register(WindowShow)
-admin.site.register(ScheduleItem)
+admin.site.register(ScheduleItem, ScheduleItemAdmin)
