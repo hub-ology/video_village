@@ -48,4 +48,4 @@ class VideoScore(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return 'User:' + str(self.user) + 'Video' + str(self.video)
+        return ' '.join(('User:' + str(self.user),'Video:' + str(self.video),'Score:' + str(self.score)))
