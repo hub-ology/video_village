@@ -47,3 +47,5 @@ class VideoScore(models.Model):
     video = models.ForeignKey('Video')
     score = models.IntegerField()
 
+    def __str__(self):
+        return ' '.join(('User:' + str(self.user),'Video:' + str(self.video),'Score:' + str(self.score)))
